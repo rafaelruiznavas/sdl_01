@@ -27,7 +27,10 @@ public:
         };
         // Almacemanos en el smart pointer
         m_SDLWindow = UniqueSDLWindow(ptr);
+    }
 
+    void Render()
+    {
         const auto* fmt = SDL_GetPixelFormatDetails(GetSurface()->format);
 
         SDL_FillSurfaceRect(
@@ -35,8 +38,11 @@ public:
             nullptr,
             SDL_MapRGB(fmt, nullptr, 50,50,50)
         );
+    }
 
-        SDL_UpdateWindowSurface(m_SDLWindow.get());        
+    void Update()
+    {
+        SDL_UpdateWindowSurface(m_SDLWindow.get());
     }
 
     SDL_Surface* GetSurface() const {
