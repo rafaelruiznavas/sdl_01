@@ -23,15 +23,26 @@ class Window
 public:
     Window() {
         SDL_Window* ptr{
-            SDL_CreateWindow("Hello Window", 800, 300, SDL_WINDOW_RESIZABLE)
+            SDL_CreateWindow("Hello Window", 700, 300, 0)
         };
-        
-        SDL_GetWindowSurface(ptr);
-        SDL_UpdateWindowSurface(ptr);
-
         // Almacemanos en el smart pointer
         m_SDLWindow = UniqueSDLWindow(ptr);
+
+        const auto* fmt = SDL_GetPixelFormatDetails(GetSurface()->format);
+
+        SDL_FillSurfaceRect(
+            GetSurface(),
+            nullptr,
+            SDL_MapRGB(fmt, nullptr, 50,50,50)
+        );
+
+        SDL_UpdateWindowSurface(m_SDLWindow.get());        
     }
+
+    SDL_Surface* GetSurface() const {
+        return SDL_GetWindowSurface(m_SDLWindow.get());
+    }
+
 
     // Aun necesitamos una forma de obtener el puntero raw para otras interacciones con funciones de SDL
     SDL_Window* GetRaw() const { return m_SDLWindow.get(); }
