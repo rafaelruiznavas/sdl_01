@@ -2,8 +2,7 @@
   "version": 3,
   "configurePresets": [{
     "name": "default",
-    "binaryDir": "build",
-    "generator": "NMake Makefiles"
+    "binaryDir": "build"
   }],
   "buildPresets": [{
     "name": "default",
