@@ -20,8 +20,9 @@ class Rectangle
     }
 public:
     Rectangle(const SDL_Rect& l_rect) : m_rect(l_rect) {}
+    virtual ~Rectangle() = default;
 
-    void Render(SDL_Surface* l_surface) const
+    virtual void Render(SDL_Surface* l_surface) const
     {
         auto [r, g, b, a] {
             m_isPointerHovering ? m_hoverColor : m_color

@@ -2,7 +2,7 @@
 #include <SDL3/SDL_main.h>
 #include <iostream>
 #include "Window.h"
-#include "Rectangle.h"
+#include "UI.h"
 
 void HandleEvent(SDL_Event& e)
 {
@@ -24,14 +24,14 @@ int main(int, char**) {
     // Inicializamos SDL
     SDL_Init(SDL_INIT_VIDEO);
     Window gameWindow;
-    Rectangle rect{SDL_Rect{50,50,50,50}};
+    UI uiManager;
 
     bool IsRunning = true;
     SDL_Event event;
     while (IsRunning) {
         // Procesamos eventos
         while (SDL_PollEvent(&event)) {
-            rect.HandleEvent(event);
+            uiManager.HandleEvent(event);
 
             if (event.type == SDL_EVENT_QUIT) {
                 IsRunning = false;
@@ -43,7 +43,7 @@ int main(int, char**) {
         // Renderizamos los cambios
         // Renderizamos el color de fondo
         gameWindow.Render();
-        rect.Render(gameWindow.GetSurface());
+        uiManager.Render(gameWindow.GetSurface());
 
         // Intercambiamos los buffers
         gameWindow.Update();
